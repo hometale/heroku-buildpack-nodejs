@@ -20,16 +20,6 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
-### Custom code for HomeTale
-# Write a custom .npmrc to allow installing private dependencies
-file_name="$BUILD_DIR/.npmrc"
-echo "always-auth=true" >> $file_name
-echo "@hometale:registry=https://npm.pkg.github.com/" >> $file_name
-echo "//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN_READ}" >> $file_name
-cat $file_name
-echo "Custom HomeTale .npmrc created"
-### ===
-
 ### Load dependencies
 
 # shellcheck source=lib/vendor/stdlib_v7.sh
@@ -145,6 +135,16 @@ cd "$BUILD_DIR"
 create_env # can't pipe the whole thing because piping causes subshells, preventing exports
 list_node_config | output "$LOG_FILE"
 create_build_env
+
+### Custom code for HomeTale
+# Write a custom .npmrc to allow installing private dependencies
+file_name="$BUILD_DIR/.npmrc"
+echo "always-auth=true" >> $file_name
+echo "@hometale:registry=https://npm.pkg.github.com/" >> $file_name
+echo "//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN_READ}" >> $file_name
+cat $file_name
+echo "Custom HomeTale .npmrc created"
+### ===
 
 ### Configure package manager cache directories
 [ ! "$YARN_CACHE_FOLDER" ] && YARN_CACHE_FOLDER=$(mktemp -d -t yarncache.XXXXX)
