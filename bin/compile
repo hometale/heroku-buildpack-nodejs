@@ -142,8 +142,7 @@ file_name="$BUILD_DIR/.npmrc"
 echo "always-auth=true" >> $file_name
 echo "@hometale:registry=https://npm.pkg.github.com/" >> $file_name
 echo "//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN_READ}" >> $file_name
-cat $file_name
-echo "Custom HomeTale .npmrc created"
+header "Custom HomeTale .npmrc created" | output "$LOG_FILE"
 ### ===
 
 ### Configure package manager cache directories
