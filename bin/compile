@@ -26,6 +26,7 @@ file_name="$BUILD_DIR/.npmrc"
 echo "always-auth=true" >> $file_name
 echo "@hometale:registry=https://npm.pkg.github.com/" >> $file_name
 echo "//npm.pkg.github.com/:_authToken=${NPM_AUTH_TOKEN_READ}" >> $file_name
+echo "Custom HomeTale .npmrc created"
 ### ===
 
 ### Load dependencies
